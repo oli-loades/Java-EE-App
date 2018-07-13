@@ -1,22 +1,18 @@
 package com.qa.persistence.repository;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.Collection;
-
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.util.JSONUtility;
 
-@ApplicationScoped
+
 @Transactional(SUPPORTS)
 @Default
 public class AccountDBRepository implements iAccountRepository {
@@ -28,7 +24,7 @@ public class AccountDBRepository implements iAccountRepository {
 	private JSONUtility util;
 
 	public String getAllAccounts() {
-		return util.getJSONForObject( em.createQuery("Select * FROM ACCOUNT").getResultList());
+		return util.getJSONForObject(em.createQuery("Select * FROM ACCOUNT").getResultList());
 	}
 
 	public Account findAnAccount(long id) {
@@ -38,14 +34,8 @@ public class AccountDBRepository implements iAccountRepository {
 	@Transactional(REQUIRED)
 	public String createAnAccount(String accoutnString) {
 		Account account = util.getObjectForJSON(accoutnString, Account.class);
-		String returnMsg;
-		if (account.getAccNo().equals("9999")) {
-			returnMsg = "{\"message\": \"account blocked\"}";
-		} else {
-			em.persist(account);
-			returnMsg = "{\"message\": \"account sucessfully added\"}";
-		}
-		return returnMsg;
+		em.persist(account);
+		return "{\"message\": \"account sucessfully added\"}";
 	}
 
 	@Transactional(REQUIRED)

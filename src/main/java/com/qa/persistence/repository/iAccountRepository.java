@@ -1,6 +1,5 @@
 package com.qa.persistence.repository;
 
-import java.util.Collection;
 
 import com.qa.persistence.domain.Account;
 
