@@ -3,12 +3,14 @@ package com.qa.persistence.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.util.JSONUtility;
 
+@ApplicationScoped
 @Alternative
 public class AccountMapRepository implements iAccountRepository {
 
@@ -30,8 +32,9 @@ public class AccountMapRepository implements iAccountRepository {
 
 	public String createAnAccount(String accoutnString) {
 		Account account = util.getObjectForJSON(accoutnString, Account.class);
-		accountMap.put(id, account);
-		id++;
+		account.setId(id);
+		accountMap.put(this.id, account);
+		this.id++;
 		return "{\"message\": \"account sucessfully added\"}";
 	}
 

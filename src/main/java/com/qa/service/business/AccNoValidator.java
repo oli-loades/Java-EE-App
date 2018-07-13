@@ -12,6 +12,10 @@ public class AccNoValidator implements iAccountValidator{
 	@Inject
 	private JSONUtility jUtil;
 	
+	public AccNoValidator() {
+		
+	}
+	
 	public boolean isValid(String account) {
 		return !jUtil.getObjectForJSON(account, Account.class).getAccNo().equals("9999");
 	}
