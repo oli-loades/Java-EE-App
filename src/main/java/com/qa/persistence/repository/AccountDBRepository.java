@@ -1,56 +1,60 @@
 package com.qa.persistence.repository;
 
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
-import java.util.List;
-
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.util.JSONUtility;
 
+
 @Transactional(SUPPORTS)
-public class AccountRepository {
-	
+@Default
+public class AccountDBRepository implements iAccountRepository {
+
 	@PersistenceContext(unitName = "primary")
 	private EntityManager em;
-	
+
+	@Inject
 	private JSONUtility util;
 
-	public List<Account> getAllAccounts() {
-		Query query = em.createQuery("Select * FROM ACCOUNT");
-		return query.getResultList();
+	public String getAllAccounts() {
+		return util.getJSONForObject(em.createQuery("Select * FROM ACCOUNT").getResultList());
 	}
-	
+
 	public Account findAnAccount(long id) {
 		return em.find(Account.class, id);
 	}
-	
+
 	@Transactional(REQUIRED)
-	public void createAnAccount(String accoutnString) {
+	public String createAnAccount(String accoutnString) {
 		Account account = util.getObjectForJSON(accoutnString, Account.class);
 		em.persist(account);
+		return "{\"message\": \"account sucessfully added\"}";
 	}
-	
+
 	@Transactional(REQUIRED)
-	public void updateAnAccount(String accountString,long id) {
+	public String updateAnAccount(String accountString, long id) {
 		Account updatedAccount = util.getObjectForJSON(accountString, Account.class);
 		Account account = findAnAccount(id);
-		if(account != null) {
+		if (account != null) {
 			account = updatedAccount;
 			em.merge(account);
 		}
+		return "{\"message\": \"account sucessfully updated\"}";
 	}
-	
+
 	@Transactional(REQUIRED)
-	public void deleteAccount(long id) {
+	public String deleteAccount(long id) {
 		Account account = findAnAccount(id);
 		if (account != null) {
 			em.remove(account);
 		}
+		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 }
