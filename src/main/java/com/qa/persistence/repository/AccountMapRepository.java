@@ -33,9 +33,16 @@ public class AccountMapRepository implements iAccountRepository {
 
 	public String createAnAccount(String accoutnString) {
 		Account account = util.getObjectForJSON(accoutnString, Account.class);
-		accountMap.put(id, account);
-		id++;
-		return "{\"message\": \"account sucessfully added\"}";
+		String returnMsg;
+		if(account.getAccNo().equals("9999")) {
+			returnMsg = "{\"message\": \"account blocked\"}";
+		}else {
+			accountMap.put(id, account);
+			id++;
+			returnMsg = "{\"message\": \"account sucessfully added\"}";
+		}
+	
+		return returnMsg;
 	}
 
 	public String updateAnAccount(String accountString, long id) {

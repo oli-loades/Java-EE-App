@@ -28,8 +28,7 @@ public class AccountDBRepository implements iAccountRepository {
 	private JSONUtility util;
 
 	public String getAllAccounts() {
-		Query query = em.createQuery("Select * FROM ACCOUNT");
-		return util.getJSONForObject(query.getResultList());
+		return util.getJSONForObject( em.createQuery("Select * FROM ACCOUNT").getResultList());
 	}
 
 	public Account findAnAccount(long id) {
@@ -39,8 +38,14 @@ public class AccountDBRepository implements iAccountRepository {
 	@Transactional(REQUIRED)
 	public String createAnAccount(String accoutnString) {
 		Account account = util.getObjectForJSON(accoutnString, Account.class);
-		em.persist(account);
-		return "{\"message\": \"account sucessfully added\"}";
+		String returnMsg;
+		if (account.getAccNo().equals("9999")) {
+			returnMsg = "{\"message\": \"account blocked\"}";
+		} else {
+			em.persist(account);
+			returnMsg = "{\"message\": \"account sucessfully added\"}";
+		}
+		return returnMsg;
 	}
 
 	@Transactional(REQUIRED)
