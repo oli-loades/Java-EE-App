@@ -34,7 +34,13 @@ public class AccountService {
 	}
 
 	public String updateAccount(long id, String newAcount) {
-		return accRepo.updateAnAccount(newAcount, id);
+		String returnMsg;
+		if(validator.isValid(newAcount)) {
+			returnMsg = accRepo.updateAnAccount(newAcount, id);
+		}else {
+			returnMsg = "{\"message\": \"account blocked\"}";	
+		}
+		return returnMsg;
 	}
 
 	public String getAllAccounts() {

@@ -40,6 +40,7 @@ public class AccountMapRepository implements iAccountRepository {
 
 	public String updateAnAccount(String accountString, long id) {
 		Account updatedAccount = util.getObjectForJSON(accountString, Account.class);
+		updatedAccount.setId(id);
 		accountMap.put(id, updatedAccount);
 		return "{\"message\": \"account sucessfully updated\"}";
 	}
