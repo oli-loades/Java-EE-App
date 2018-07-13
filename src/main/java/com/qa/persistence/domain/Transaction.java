@@ -17,13 +17,14 @@ public class Transaction {
 	@Column
 	private String name;
 
+	/*
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "account_id")
 	private Account account;
-	
+	*/
 	public Transaction(String name, Account account) {
 		this.name = name;
-		this.account = account;
+	//	this.account = account;
 	}
 	
 	public Transaction() {}
@@ -35,7 +36,7 @@ public class Transaction {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+/*
 	public Account getAccount() {
 		return account;
 	}
@@ -43,7 +44,7 @@ public class Transaction {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-
+*/
 	public int getId() {
 		return id;
 	}

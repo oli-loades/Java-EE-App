@@ -24,17 +24,17 @@ public class Account {
 	private String surname;
 	@Column(length = 4)
 	private String accNo;
-
+/*
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
-	
+	*/
 	public Account() {}
 
 	public Account(String firstName, String surname, String accNo) {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.accNo = accNo;
-		this.transactions = new ArrayList<Transaction>();
+	//	this.transactions = new ArrayList<Transaction>();
 	}
 	
 
@@ -70,10 +70,11 @@ public class Account {
 		this.id = id;
 	}
 	
+	/*
 	public void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
 		transaction.setAccount(this);
 	}
-	
+	*/
 
 }
