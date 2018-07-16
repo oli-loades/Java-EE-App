@@ -56,4 +56,5 @@ public class AccountController {
 	public String createAccount(String account) {
 		return accServ.addAccount(account);
 	}
+	
 }

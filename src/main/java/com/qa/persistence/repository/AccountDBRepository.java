@@ -46,7 +46,9 @@ public class AccountDBRepository implements iAccountRepository {
 		Account updatedAccount = util.getObjectForJSON(accountString, Account.class);
 		Account account = findAnAccount(id);
 		if (account != null) {
-			account = updatedAccount;
+			account.setAccNo(updatedAccount.getAccNo());
+			account.setFirstName(updatedAccount.getFirstName());
+			account.setSurname(updatedAccount.getSurname());
 			em.merge(account);
 		}
 		return "{\"message\": \"account sucessfully updated\"}";

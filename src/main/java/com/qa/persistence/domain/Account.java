@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Account {
 
@@ -25,7 +27,8 @@ public class Account {
 	@Column(length = 4)
 	private String accNo;
 
-	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "account_id", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
 
 	public Account() {}
@@ -72,8 +75,11 @@ public class Account {
 	
 	
 	public void addTransaction(Transaction transaction) {
-		transactions.add(transaction);
-		transaction.setAccount(this);
+		transactions.add(transaction);	
+	}
+	
+	public List<Transaction> getTransactions(){
+		return transactions;
 	}
 	
 
