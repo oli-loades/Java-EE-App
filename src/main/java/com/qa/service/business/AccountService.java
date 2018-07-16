@@ -12,6 +12,8 @@ public class AccountService {
 
 	@Inject
 	private iAccountValidator validator;
+	
+	public AccountService() {}
 
 	public String addAccount(String account) {
 		String returnMsg;
@@ -23,16 +25,22 @@ public class AccountService {
 		return returnMsg;
 	}
 
-	public Account getAccount(long accNo) {
-		return accRepo.findAnAccount(accNo);
+	public Account getAccount(long id) {
+		return accRepo.findAnAccount(id);
 	}
 
-	public String deleteAccount(long accNo) {
-		return accRepo.deleteAccount(accNo);
+	public String deleteAccount(long id) {
+		return accRepo.deleteAccount(id);
 	}
 
-	public String updateAccount(long accNo, String newAcount) {
-		return accRepo.updateAnAccount(newAcount, accNo);
+	public String updateAccount(long id, String newAcount) {
+		String returnMsg;
+		if(validator.isValid(newAcount)) {
+			returnMsg = accRepo.updateAnAccount(newAcount, id);
+		}else {
+			returnMsg = "{\"message\": \"account blocked\"}";	
+		}
+		return returnMsg;
 	}
 
 	public String getAllAccounts() {

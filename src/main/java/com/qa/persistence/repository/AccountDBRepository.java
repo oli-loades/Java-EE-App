@@ -1,5 +1,6 @@
 package com.qa.persistence.repository;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -12,7 +13,7 @@ import static javax.transaction.Transactional.TxType.SUPPORTS;
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.util.JSONUtility;
 
-
+@ApplicationScoped
 @Transactional(SUPPORTS)
 @Default
 public class AccountDBRepository implements iAccountRepository {
@@ -22,9 +23,11 @@ public class AccountDBRepository implements iAccountRepository {
 
 	@Inject
 	private JSONUtility util;
+	
+	public AccountDBRepository(){}
 
 	public String getAllAccounts() {
-		return util.getJSONForObject(em.createQuery("Select * FROM ACCOUNT").getResultList());
+		return util.getJSONForObject(em.createQuery("SELECT a FROM Account a").getResultList());
 	}
 
 	public Account findAnAccount(long id) {

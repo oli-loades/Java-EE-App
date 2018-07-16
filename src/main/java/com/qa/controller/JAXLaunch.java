@@ -1,5 +1,9 @@
 package com.qa.controller;
 
-public class JAXLaunch {
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+@ApplicationPath("rest")
+public class JAXLaunch extends Application {
 
 }

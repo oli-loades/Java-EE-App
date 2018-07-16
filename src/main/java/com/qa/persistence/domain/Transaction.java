@@ -17,7 +17,8 @@ public class Transaction {
 	@Column
 	private String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "account_id")
 	private Account account;
 	
@@ -25,6 +26,8 @@ public class Transaction {
 		this.name = name;
 		this.account = account;
 	}
+	
+	public Transaction() {}
 
 	public String getName() {
 		return name;

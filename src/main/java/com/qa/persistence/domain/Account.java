@@ -1,12 +1,14 @@
 package com.qa.persistence.domain;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -14,7 +16,7 @@ import javax.persistence.OneToMany;
 public class Account {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy =GenerationType.IDENTITY )
 	private long id;
 	@Column(length = 50)
 	private String firstName;
@@ -26,12 +28,15 @@ public class Account {
 	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
 
+	public Account() {}
+
 	public Account(String firstName, String surname, String accNo) {
 		this.firstName = firstName;
 		this.surname = surname;
 		this.accNo = accNo;
 		this.transactions = new ArrayList<Transaction>();
 	}
+	
 
 	public String getFirstName() {
 		return firstName;
@@ -65,9 +70,11 @@ public class Account {
 		this.id = id;
 	}
 	
+	
 	public void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
 		transaction.setAccount(this);
 	}
+	
 
 }
