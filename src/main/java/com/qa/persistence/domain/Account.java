@@ -12,13 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(length = 50)
 	private String firstName;
@@ -27,11 +25,11 @@ public class Account {
 	@Column(length = 4)
 	private String accNo;
 
-	@JsonManagedReference
 	@OneToMany(mappedBy = "account_id", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
 
-	public Account() {}
+	public Account() {
+	}
 
 	public Account(String firstName, String surname, String accNo) {
 		this.firstName = firstName;
@@ -39,7 +37,6 @@ public class Account {
 		this.accNo = accNo;
 		this.transactions = new ArrayList<Transaction>();
 	}
-	
 
 	public String getFirstName() {
 		return firstName;
@@ -72,15 +69,13 @@ public class Account {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+
 	public void addTransaction(Transaction transaction) {
-		transactions.add(transaction);	
+		transactions.add(transaction);
 	}
-	
-	public List<Transaction> getTransactions(){
+
+	public List<Transaction> getTransactions() {
 		return transactions;
 	}
-	
 
 }

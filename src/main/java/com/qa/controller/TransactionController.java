@@ -10,45 +10,45 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 import com.qa.persistence.domain.Transaction;
-import com.qa.service.business.TransactionService;
+import com.qa.service.business.iTransactionService;
 
 @Path("/transaction")
 public class TransactionController {
 	@Inject
-	private TransactionService tServ;
-	
+	private iTransactionService tServ;
+
 	public TransactionController() {
-		
+
 	}
-	
+
 	@Path("/json")
 	@GET
 	@Produces({ "application/json" })
 	public String getAllTransactions() {
 		return tServ.getAllTransactions();
 	}
-	
+
 	@Path("/json/{id}")
 	@GET
 	@Produces({ "application/json" })
 	public Transaction findTransaction(@PathParam("id") Long id) {
 		return tServ.findTransaction(id);
 	}
-	
+
 	@Path("/json/{id}")
 	@PUT
 	@Produces({ "application/json" })
 	public String updateTransaction(@PathParam("id") Long id, String newTransaction) {
 		return tServ.updateTransaction(newTransaction, id);
 	}
-	
+
 	@Path("/json/{id}")
 	@DELETE
 	@Produces({ "application/json" })
 	public String deleteTransaction(@PathParam("id") Long id) {
 		return tServ.deleteTransaction(id);
 	}
-	
+
 	@Path("/json")
 	@POST
 	@Produces({ "application/json" })

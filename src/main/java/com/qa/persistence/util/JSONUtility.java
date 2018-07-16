@@ -1,15 +1,9 @@
 package com.qa.persistence.util;
 
-import java.io.IOException;
-
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.qa.persistence.domain.Account;
-import com.qa.persistence.domain.Transaction;
 
 public class JSONUtility {
-	
+
 	private Gson gson;
 
 	public JSONUtility() {
@@ -23,5 +17,5 @@ public class JSONUtility {
 	public <T> T getObjectForJSON(String jsonString, Class<T> classType) {
 		return gson.fromJson(jsonString, classType);
 	}
-	
+
 }

@@ -1,6 +1,7 @@
 package com.qa.persistence.repository;
 
 import javax.enterprise.context.ApplicationScoped;
+
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,8 +24,9 @@ public class AccountDBRepository implements iAccountRepository {
 
 	@Inject
 	private JSONUtility util;
-	
-	public AccountDBRepository(){}
+
+	public AccountDBRepository() {
+	}
 
 	public String getAllAccounts() {
 		return util.getJSONForObject(em.createQuery("SELECT a FROM Account a").getResultList());

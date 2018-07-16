@@ -5,22 +5,23 @@ import javax.inject.Inject;
 import com.qa.persistence.domain.Account;
 import com.qa.persistence.repository.iAccountRepository;
 
-public class AccountService {
+public class AccountService implements iAccountService {
 
 	@Inject
 	private iAccountRepository accRepo;
 
 	@Inject
 	private iAccountValidator validator;
-	
-	public AccountService() {}
+
+	public AccountService() {
+	}
 
 	public String addAccount(String account) {
 		String returnMsg;
-		if(validator.isValid(account)) {
+		if (validator.isValid(account)) {
 			returnMsg = accRepo.createAnAccount(account);
-		}else {
-			returnMsg = "{\"message\": \"account blocked\"}";	
+		} else {
+			returnMsg = "{\"message\": \"account blocked\"}";
 		}
 		return returnMsg;
 	}
@@ -35,10 +36,10 @@ public class AccountService {
 
 	public String updateAccount(long id, String newAcount) {
 		String returnMsg;
-		if(validator.isValid(newAcount)) {
+		if (validator.isValid(newAcount)) {
 			returnMsg = accRepo.updateAnAccount(newAcount, id);
-		}else {
-			returnMsg = "{\"message\": \"account blocked\"}";	
+		} else {
+			returnMsg = "{\"message\": \"account blocked\"}";
 		}
 		return returnMsg;
 	}
@@ -46,6 +47,5 @@ public class AccountService {
 	public String getAllAccounts() {
 		return accRepo.getAllAccounts();
 	}
-	
 
 }
