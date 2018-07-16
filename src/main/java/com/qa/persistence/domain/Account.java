@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@Column(length = 50)
 	private String firstName;
@@ -25,10 +25,11 @@ public class Account {
 	@Column(length = 4)
 	private String accNo;
 
-	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "account_id", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
 
-	public Account() {}
+	public Account() {
+	}
 
 	public Account(String firstName, String surname, String accNo) {
 		this.firstName = firstName;
@@ -36,7 +37,6 @@ public class Account {
 		this.accNo = accNo;
 		this.transactions = new ArrayList<Transaction>();
 	}
-	
 
 	public String getFirstName() {
 		return firstName;
@@ -69,12 +69,13 @@ public class Account {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
+
 	public void addTransaction(Transaction transaction) {
 		transactions.add(transaction);
-		transaction.setAccount(this);
 	}
-	
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
 
 }
