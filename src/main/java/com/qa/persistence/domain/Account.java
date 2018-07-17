@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Account {
@@ -18,13 +20,22 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(length = 50)
+	
+	@Size(min = 1, max =50)
+	@NotNull
 	private String firstName;
+	
 	@Column(length = 50)
+	@Size(min = 1, max =50)
+	@NotNull
 	private String surname;
-	@Column(length = 4)
+	
+	@Column
+	@Size(min = 4, max =4)
+	@NotNull
 	private String accNo;
 
+	@Size(max = 100)
 	@OneToMany(mappedBy = "account_id", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Transaction> transactions;
 

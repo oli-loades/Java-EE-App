@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Transaction {
@@ -14,6 +15,7 @@ public class Transaction {
 	private long id;
 
 	@Column
+	@Pattern(regexp = "^[A-Za-z0-9]+$")
 	private String name;
 
 	@Column
