@@ -20,7 +20,7 @@ public class AccountController {
 	@Inject
 	private iAccountService accServ;
 	
-	private static Logger logger = Logger.getLogger(AccountController.class);
+	private static final Logger LOGGER = Logger.getLogger(AccountController.class);
 
 	public AccountController() {
 
@@ -30,6 +30,7 @@ public class AccountController {
 	@GET
 	@Produces({ "application/json" })
 	public String getAllAccounts() {
+		LOGGER.info("account controller get all accounts");
 		return accServ.getAllAccounts();
 	}
 
@@ -37,6 +38,7 @@ public class AccountController {
 	@GET
 	@Produces({ "application/json" })
 	public Account findAccount(@PathParam("id") Long id) {
+		LOGGER.info("account controller find account");
 		return accServ.getAccount(id);
 	}
 
@@ -44,6 +46,7 @@ public class AccountController {
 	@PUT
 	@Produces({ "application/json" })
 	public String updateAccount(@PathParam("id") Long id, String account) {
+		LOGGER.info("account controller update account");
 		return accServ.updateAccount(id, account);
 	}
 
@@ -51,6 +54,7 @@ public class AccountController {
 	@DELETE
 	@Produces({ "application/json" })
 	public String deleteAccount(@PathParam("id") Long id) {
+		LOGGER.info("account controller delete account");
 		return accServ.deleteAccount(id);
 	}
 
@@ -58,6 +62,7 @@ public class AccountController {
 	@POST
 	@Produces({ "application/json" })
 	public String createAccount(String account) {
+		LOGGER.info("account controller create new account");
 		return accServ.addAccount(account);
 	}
 
