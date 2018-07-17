@@ -66,4 +66,12 @@ public class AccountController {
 		return accServ.addAccount(account);
 	}
 
+	public iAccountService getAccServ() {
+		return accServ;
+	}
+
+	public void setAccServ(iAccountService accServ) {
+		this.accServ = accServ;
+	}
+
 }

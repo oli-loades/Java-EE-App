@@ -73,4 +73,20 @@ public class AccountDBRepository implements iAccountRepository {
 		}
 		return "{\"message\": \"account sucessfully deleted\"}";
 	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
+
+	public JSONUtility getUtil() {
+		return util;
+	}
+
+	public void setUtil(JSONUtility util) {
+		this.util = util;
+	}
 }

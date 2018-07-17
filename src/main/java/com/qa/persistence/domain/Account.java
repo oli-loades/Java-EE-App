@@ -13,25 +13,28 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "Account")
 public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
-	@Size(min = 1, max =50)
+
+	@Size(min = 1, max = 50)
 	@NotNull
 	private String firstName;
-	
+
 	@Column(length = 50)
-	@Size(min = 1, max =50)
+	@Size(min = 1, max = 50)
 	@NotNull
 	private String surname;
-	
+
 	@Column
-	@Size(min = 4, max =4)
+	@Size(min = 4, max = 4)
 	@NotNull
 	private String accNo;
 
@@ -49,6 +52,7 @@ public class Account {
 		this.transactions = new ArrayList<Transaction>();
 	}
 
+	@XmlElement(name = "firstname")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -57,6 +61,7 @@ public class Account {
 		this.firstName = firstName;
 	}
 
+	@XmlElement(name = "surname")
 	public String getSurname() {
 		return surname;
 	}
@@ -65,6 +70,7 @@ public class Account {
 		this.surname = surname;
 	}
 
+	@XmlElement (name = "accno")
 	public String getAccNo() {
 		return accNo;
 	}

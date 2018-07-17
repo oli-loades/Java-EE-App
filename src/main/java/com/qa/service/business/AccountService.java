@@ -57,4 +57,20 @@ public class AccountService implements iAccountService {
 		return accRepo.getAllAccounts();
 	}
 
+	public iAccountRepository getAccRepo() {
+		return accRepo;
+	}
+
+	public void setAccRepo(iAccountRepository accRepo) {
+		this.accRepo = accRepo;
+	}
+
+	public iAccountValidator getValidator() {
+		return validator;
+	}
+
+	public void setValidator(iAccountValidator validator) {
+		this.validator = validator;
+	}
+
 }

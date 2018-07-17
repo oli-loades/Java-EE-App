@@ -25,4 +25,12 @@ public class AccNoValidator implements iAccountValidator {
 		LOGGER.info("account validato is valid");
 		return !jUtil.getObjectForJSON(account, Account.class).getAccNo().equals("9999");
 	}
+
+	public JSONUtility getjUtil() {
+		return jUtil;
+	}
+
+	public void setjUtil(JSONUtility jUtil) {
+		this.jUtil = jUtil;
+	}
 }
