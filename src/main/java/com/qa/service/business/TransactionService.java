@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
 
-import com.qa.controller.AccountController;
+import com.qa.controller.rest.AccountController;
 import com.qa.persistence.domain.Transaction;
 import com.qa.persistence.repository.iTransactionRepository;
 
