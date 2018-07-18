@@ -2,6 +2,7 @@ package com.qa.persistence.repository;
 
 import javax.enterprise.context.ApplicationScoped;
 
+
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
